@@ -5,17 +5,17 @@ import axios from 'axios';
 const state = reactive({ count: 0 });
 const index = reactive({ data: '' })
 const home = reactive({ data: {} })
-const getIndex = (params) => {
-  return axios.get('http://localhost:10373', {
+const getIndex = (params: object) => {
+  return axios.get('/admin', {
     params,
   });
 }
 const getCount = () => {
-  return axios.get('http://localhost:10373/count');
+  return axios.get('/admin/count');
 }
 
-const getHome = (data) => {
-  return axios.post('http://localhost:10373/list', data);
+const getHome = (data: object) => {
+  return axios.post('/admin/list', data);
 }
 
 onMounted(() => {

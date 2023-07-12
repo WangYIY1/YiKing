@@ -4,6 +4,10 @@ const fs = require('fs');
 const app = express();
 const port = 10373;
 
+const birds = require('../router/birds');
+
+// 中间件
+app.use('/birds', birds);
 // 解析post的两个中间件
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -35,11 +39,11 @@ app.post('/list', (req, res) => {
   const {count} = req.body;
   fs.readFile('../data/home.json', function (err, data) {
     const reqData = data.toString();
-      const _ = JSON.parse(reqData);
-      fs.writeFileSync('../data/home.json', JSON.stringify({
-          ..._,
-          count
-      }));
+    const _ = JSON.parse(reqData);
+    fs.writeFileSync('../data/home.json', JSON.stringify({
+      ..._,
+      count
+    }));
     res.send({
       count
     });
